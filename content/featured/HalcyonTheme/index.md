@@ -1,15 +1,13 @@
 ---
-date: '1'
-title: 'Halcyon Theme'
+date: '2022-01-01'
+title: 'Return Youtube Dislike'
 cover: './halcyon.png'
-github: 'https://github.com/bchiang7/halcyon-site'
-external: 'https://halcyon-theme.netlify.com/'
+github: ''
+external: 'https://returnyoutubedislike.com/'
+cta: 'https://returnyoutubedislike.com/'
 tech:
-  - VS Code
-  - Sublime Text
-  - Atom
-  - iTerm2
-  - Hyper
+  - JavaScript
+  - Browser Extension
 ---
 
-A minimal, dark blue theme for VS Code, Sublime Text, Atom, iTerm, and more. Available on [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=brittanychiang.halcyon-vscode), [Package Control](https://packagecontrol.io/packages/Halcyon%20Theme), [Atom Package Manager](https://atom.io/themes/halcyon-syntax), and [npm](https://www.npmjs.com/package/hyper-halcyon-theme).
+Contributed to an open source project Return Youtube Dislike (4M+ downloads) with an aim to bring back the YouTube dislike counter. Specifically worked on injecting the dislike button and count on the website, making it essentially indistinguishable from the original YouTube UI.

@@ -1,15 +1,14 @@
 ---
-date: '2'
-title: 'Spotify Profile'
+date: '2023-01-01'
+title: 'Personal Portfolio Website'
 cover: './demo.png'
-github: 'https://github.com/bchiang7/spotify-profile'
-external: 'https://spotify-profile.herokuapp.com/'
+github: 'https://github.com/yashptel/v4'
+external: 'https://github.com/yashptel/v4'
 tech:
-  - React
-  - Styled Components
-  - Express
-  - Spotify API
-  - Heroku
+  - React.js
+  - Node.js
+  - Express.js
+  - AWS
 ---
 
-A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.
+A modern, responsive portfolio website to showcase my professional experience, open source contributions, and technical skills. Built with React.js, Node.js, and AWS, this site highlights my work in scalable backend and full-stack development.
