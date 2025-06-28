@@ -12,3 +12,5 @@ tech:
   - React
 description: 'SERO is a platform that helps manufacturers improve their manufacturing efficiency by providing real-time data and insights into their production processes.'
 ---
+
+SERO is a platform that helps manufacturers improve their manufacturing efficiency by providing real-time data and insights into their production processes. It offers features like production monitoring, quality control, and predictive maintenance to optimize operations.

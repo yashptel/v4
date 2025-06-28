@@ -3,7 +3,7 @@ date: '2022-01-01'
 title: 'Serverless Framework v3'
 github: 'https://github.com/oss-serverless/serverless'
 external: 'https://github.com/oss-serverless/serverless/'
-showInProjects: false
+showInProjects: true
 ios: ''
 android: ''
 company: ''

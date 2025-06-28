@@ -6,7 +6,7 @@ external: 'https://returnyoutubedislike.com/'
 ios: ''
 android: ''
 company: ''
-showInProjects: false
+showInProjects: true
 tech:
   - JavaScript
   - Browser Extension
