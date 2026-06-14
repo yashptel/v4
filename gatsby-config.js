@@ -4,8 +4,8 @@ module.exports = {
   siteMetadata: {
     title: 'Yash Patel',
     description:
-      'Yash Patel is a software engineer specializing in scalable backend, infrastructure, and full-stack development. Experienced in Go, Node.js, React, and AWS.',
-    siteUrl: 'https://github.com/yashptel', // Update to your actual site URL if available
+      'Yash Patel is a backend-heavy full-stack engineer with 5+ years building production B2B SaaS for 700,000+ users. Deep in PostgreSQL, distributed systems, safe large-scale migrations, AWS, TypeScript, and Go.',
+    siteUrl: 'https://yashptel.squiwo.com',
     image: '/og.png',
     twitterUsername: '',
   },
@@ -47,8 +47,8 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `posts`,
-        path: `${__dirname}/content/posts`,
+        name: `case-studies`,
+        path: `${__dirname}/content/case-studies`,
       },
     },
     {
@@ -147,12 +147,6 @@ module.exports = {
             },
           },
         ],
-      },
-    },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: 'UA-45666519-2',
       },
     },
   ],

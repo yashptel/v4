@@ -1,16 +1,16 @@
 ---
-date: '2024-01-01'
+date: '2024-06-01'
 title: 'SERO'
 cover: './sero.png'
 github: ''
 external: 'https://app.squiwo.com/'
 cta: 'https://app.squiwo.com/'
 tech:
-  - Golang
-  - PostgreSQL
+  - Go
   - GraphQL
+  - PostgreSQL
   - React
-description: 'SERO is a platform that helps manufacturers improve their manufacturing efficiency by providing real-time data and insights into their production processes.'
+  - BetterAuth
 ---
 
-SERO is a platform that helps manufacturers improve their manufacturing efficiency by providing real-time data and insights into their production processes. It offers features like production monitoring, quality control, and predictive maintenance to optimize operations.
+Multi-tenant manufacturing-scheduling SaaS (live in production) with a TypeScript/React frontend, Go/GraphQL backend, and PostgreSQL — organization-level RBAC via BetterAuth, onboarding, orders, and subscription billing through Dodo Payments. Its core is a heuristic DAG-based production scheduler (topological ready-queue with in-degree release, critical-path ranking, capacity-aware interval slotting, greedy machine selection, idle-gap backfill) that generates full production plans in minutes instead of hours.

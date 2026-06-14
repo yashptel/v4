@@ -1,15 +1,12 @@
 ---
 date: '2022-01-01'
-title: 'Return Youtube Dislike'
+title: 'Return YouTube Dislike'
 github: 'https://github.com/Anarios/return-youtube-dislike'
 external: 'https://returnyoutubedislike.com/'
-ios: ''
-android: ''
-company: ''
 showInProjects: true
 tech:
   - JavaScript
   - Browser Extension
 ---
 
-Contributed to an open source project Return Youtube Dislike (4M+ downloads) with an aim to bring back the YouTube dislike counter. Specifically worked on injecting the dislike button and count on the website, making it essentially indistinguishable from the original YouTube UI.
+Open-source contribution to Return YouTube Dislike (4M+ users weekly), which restores YouTube's dislike count. I reverse-engineered YouTube's SPA-navigation DOM lifecycle and matched native UI components to inject the dislike button and count, so the restored interface feels indistinguishable from YouTube's own — at scale.

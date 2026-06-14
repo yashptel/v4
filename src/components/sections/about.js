@@ -18,22 +18,76 @@ const StyledAboutSection = styled.section`
     }
   }
 `;
-const StyledText = styled.div`
-  ul.skills-list {
+const StyledText = styled.div``;
+const StyledSkills = styled.div`
+  margin-top: 25px;
+
+  .skills-intro {
+    margin: 0 0 15px;
+  }
+
+  ul.skills-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(140px, 200px));
-    grid-gap: 0 10px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px 30px;
     padding: 0;
-    margin: 20px 0 0 0;
-    overflow: hidden;
+    margin: 0;
+    list-style: none;
+
+    @media (max-width: 600px) {
+      grid-template-columns: 1fr;
+    }
+
+    li {
+      position: relative;
+      padding-left: 20px;
+
+      &:before {
+        content: '▹';
+        position: absolute;
+        left: 0;
+        top: 2px;
+        color: var(--green);
+        font-size: var(--fz-sm);
+        line-height: 12px;
+      }
+
+      .cat {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--lightest-slate);
+        font-family: var(--font-mono);
+        font-size: var(--fz-xs);
+      }
+
+      .items {
+        color: var(--light-slate);
+        font-size: var(--fz-sm);
+        line-height: 1.5;
+      }
+    }
+  }
+`;
+const StyledCreds = styled.div`
+  margin-top: 35px;
+
+  h3 {
+    margin: 0 0 12px;
+    color: var(--lightest-slate);
+    font-size: var(--fz-lg);
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
     list-style: none;
 
     li {
       position: relative;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       padding-left: 20px;
-      font-family: var(--font-mono);
-      font-size: var(--fz-xs);
+      color: var(--light-slate);
+      font-size: var(--fz-sm);
 
       &:before {
         content: '▹';
@@ -41,7 +95,6 @@ const StyledText = styled.div`
         left: 0;
         color: var(--green);
         font-size: var(--fz-sm);
-        line-height: 12px;
       }
     }
   }
@@ -126,18 +179,24 @@ const About = () => {
   }, []);
 
   const skills = [
-    'JavaScript',
-    'TypeScript',
-    'HTML',
-    'CSS',
-    'Go (Golang)',
-    'React.js',
-    'Express.js',
-    'GraphQL',
-    'Node.js',
-    'Postgres',
-    'AWS',
-    'Docker',
+    { cat: 'Languages', items: 'TypeScript · JavaScript · Go · Python · SQL' },
+    {
+      cat: 'Backend & APIs',
+      items: 'Node.js · Express · Fastify · Go (Fiber, net/http) · GraphQL · REST · Temporal',
+    },
+    { cat: 'Frontend', items: 'React · Next.js · React Native · Redux · XState · Tailwind · Vue' },
+    {
+      cat: 'Databases & Data',
+      items: 'PostgreSQL (replication, LSN, RLS) · Redis · pgvector · Qdrant · DynamoDB',
+    },
+    {
+      cat: 'Cloud & DevOps',
+      items: 'AWS (S3, Lambda, CloudFront, RDS, SQS) · GCP · Docker · Kubernetes · Terraform · CI/CD',
+    },
+    {
+      cat: 'AI / LLM',
+      items: 'OpenAI · Anthropic · Gemini · Vercel AI SDK · Mastra · RAG · embeddings · local Whisper STT',
+    },
   ];
 
   return (
@@ -148,29 +207,25 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hello! My name is Yash Patel and I enjoy building scalable, secure, and
-              high-performance systems. My journey in software engineering has taken me through
-              impactful roles at <a href="https://toddleapp.com/">Toddle</a>,{' '}
-              <a href="https://www.firstcry.com/">FirstCry</a>, and{' '}
-              <a href="https://improwised.com/">Improwised Technologies</a>.
+              Hello! I’m Yash — a backend-heavy full-stack engineer with 5+ years delivering
+              production B2B SaaS to more than 700,000 users. I like owning hard problems end to
+              end, especially where databases, infrastructure, and production safety meet.
             </p>
             <p>
-              At Toddle, I spearheaded a critical project to upgrade our database ID system,
-              enabling expansion to 256+ regions and driving significant revenue growth. My
-              experience spans horizontally scaled architectures, secure authentication, and
-              fine-grained access control with PostgreSQL RLS.
+              Most recently at <a href="https://www.eventbrite.com/">Eventbrite</a> I rebuilt the
+              localization pipeline across ~140 services; before that, at{' '}
+              <a href="https://toddleapp.com/">Toddle</a>, I led a zero-downtime billion-row
+              migration, PostgreSQL read-replica scaling, and multi-tenant CDN authorization for a
+              700,000+ user platform. Earlier I cut analytics API latency at{' '}
+              <a href="https://www.firstcry.com/">FirstCry</a> and shipped production Go services at{' '}
+              <a href="https://improwised.com/">Improwised</a>.
             </p>
             <p>
-              Previously, I improved API performance at FirstCry with Redis caching and developed
-              customer-facing mobile apps. At Improwised, I built scalable REST APIs and
-              transitioned workflows to Temporal for reliability.
+              I also build and ship my own products — including AI-native tools using RAG and local
+              Whisper-style speech-to-text — and contribute to open source; my work on Return
+              YouTube Dislike runs for 4M+ users weekly.
             </p>
-            <p>Here are a few technologies I’ve been working with recently:</p>
           </div>
-
-          <ul className="skills-list">
-            {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
-          </ul>
         </StyledText>
 
         <StyledPic>
@@ -181,11 +236,36 @@ const About = () => {
               width={500}
               quality={95}
               formats={['AUTO', 'WEBP', 'AVIF']}
-              alt="Headshot"
+              alt="Headshot of Yash Patel"
             />
           </div>
         </StyledPic>
       </div>
+
+      <StyledSkills>
+        <p className="skills-intro">Here’s the stack I reach for most:</p>
+        <ul className="skills-grid">
+          {skills.map(({ cat, items }, i) => (
+            <li key={i}>
+              <span className="cat">{cat}</span>
+              <span className="items">{items}</span>
+            </li>
+          ))}
+        </ul>
+      </StyledSkills>
+
+      <StyledCreds>
+        <h3>Education &amp; Recognition</h3>
+        <ul>
+          <li>
+            B.E. in Computer Engineering — Gujarat Technological University (2017–2021), CGPA
+            8.34/10
+          </li>
+          <li>
+            Top 0.7% — ranked under 100 of 15,000+ in the HackOn with Amazon Coding Challenge, 2021
+          </li>
+        </ul>
+      </StyledCreds>
     </StyledAboutSection>
   );
 };

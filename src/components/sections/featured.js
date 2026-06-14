@@ -300,6 +300,44 @@ const StyledProject = styled.li`
         filter: grayscale(100%) contrast(1) brightness(50%);
       }
     }
+
+    .cover-fallback {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      height: 100%;
+      min-height: 360px;
+      padding: 35px 30px;
+      border-radius: var(--border-radius);
+      background-image: radial-gradient(
+          circle at 25% 20%,
+          rgba(100, 255, 218, 0.16),
+          transparent 55%
+        ),
+        linear-gradient(135deg, #1d3b6e 0%, #112240 45%, #0a192f 100%);
+
+      .cf-eyebrow {
+        color: var(--green);
+        font-family: var(--font-mono);
+        font-size: var(--fz-xs);
+      }
+
+      .cf-title {
+        margin: 10px 0 14px;
+        color: var(--white);
+        font-size: clamp(28px, 5vw, 42px);
+        font-weight: 600;
+        line-height: 1.05;
+      }
+
+      .cf-tech {
+        color: var(--light-slate);
+        font-family: var(--font-mono);
+        font-size: var(--fz-xs);
+      }
+    }
   }
 `;
 
@@ -308,7 +346,7 @@ const Featured = () => {
     {
       featured: allMarkdownRemark(
         filter: { fileAbsolutePath: { regex: "/content/featured/" } }
-        sort: { fields: [frontmatter___date], order: ASC }
+        sort: { fields: [frontmatter___date], order: DESC }
       ) {
         edges {
           node {
@@ -402,8 +440,18 @@ const Featured = () => {
                 </div>
 
                 <div className="project-image">
-                  <a href={external ? external : github ? github : '#'}>
-                    <GatsbyImage image={image} alt={title} className="img" />
+                  <a href={external ? external : github ? github : '#'} aria-label={title}>
+                    {image ? (
+                      <GatsbyImage image={image} alt={title} className="img" />
+                    ) : (
+                      <div className="cover-fallback">
+                        <span className="cf-eyebrow">Featured Project</span>
+                        <span className="cf-title">{title}</span>
+                        {tech && tech.length && (
+                          <span className="cf-tech">{tech.slice(0, 3).join('  ·  ')}</span>
+                        )}
+                      </div>
+                    )}
                   </a>
                 </div>
               </StyledProject>

@@ -1,14 +1,15 @@
 ---
 date: '2022-11-01'
-title: 'Software Engineer 2'
+title: 'Software Engineer II'
 company: 'Toddle'
 location: 'Bengaluru, India'
-range: 'Nov 2022 - Present'
+range: 'Nov 2022 - Oct 2025'
 url: 'https://toddleapp.com/'
 ---
 
-- Spearheaded a critical project to upgrade the database ID system, transitioning from 32-bit int IDs to 64-bit Int Ids, enabling the organization to expand its operations to accommodate over 256 regions from merely 4 regions. This helped add 85% revenue
-- Successfully executed the migration process with zero downtime, ensuring uninterrupted operations for the company. The migration was completed in approximately 10 hours
-- Developed a horizontally scaled database architecture that used master-slave database replication and read replica replication for better performance and reliability levels under heavy usage conditions, bringing infrastructure cost down by 25-30%
-- Developed a dual-layer authentication system through secure tokens and signed URLs securing CDN content while protecting it from unauthorized access, helping prevent any data leaks
-- Setup Row-Level Security (RLS) policies in PostgreSQL that delivered extremely fine-grained access control and enhanced the data privacy by org – based permissions management across the whole platform
+- Migrated the production ID layer from 32-bit to 64-bit Snowflake-style IDs with zero downtime — ~2B rows across hundreds of tables in ~10 hours — eliminating ID-exhaustion risk and unlocking expansion from 8 to 256+ regions
+- Scaled PostgreSQL horizontally with a primary/read-replica setup and WAL-LSN read-after-write routing, cutting peak p95 query latency ~20% and infra cost ~30% while holding 99.9% uptime for 700,000+ multi-tenant users
+- Secured 20M+ multi-tenant file/content requests weekly with signed-cookie and token-based CloudFront authorization, rolled out monitoring-first then region-by-region behind a kill switch
+- Built a TypeScript long-running task platform on Temporal — durable retries, timeouts, crash recovery, and idempotency — moving bulk emails, exports, syncs, and AI jobs out of request/response APIs
+- Migrated serverless Node.js services from Node 18 → 22 (rebuilt native Lambda layers for node-canvas and Puppeteer PDF generation) and contributed a param-fallback fix upstream to the OSS Serverless fork
+- Mentored engineers, ran 25+ technical interviews, and drove safe rollouts with Statsig and Split.io experiments

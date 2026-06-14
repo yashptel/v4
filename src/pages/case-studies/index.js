@@ -1,6 +1,5 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
-import kebabCase from 'lodash/kebabCase';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
@@ -11,21 +10,6 @@ const StyledMainContainer = styled.main`
   & > header {
     margin-bottom: 100px;
     text-align: center;
-
-    a {
-      &:hover,
-      &:focus {
-        cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>⚡</text></svg>")
-            20 0,
-          auto;
-      }
-    }
-  }
-
-  footer {
-    ${({ theme }) => theme.mixins.flexBetween};
-    width: 100%;
-    margin-top: 20px;
   }
 `;
 const StyledGrid = styled.ul`
@@ -114,57 +98,52 @@ const StyledPost = styled.li`
     font-size: 17px;
   }
 
+  footer {
+    ${({ theme }) => theme.mixins.flexBetween};
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .post__company {
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: var(--fz-xxs);
+  }
+
   .post__date {
     color: var(--light-slate);
     font-family: var(--font-mono);
     font-size: var(--fz-xxs);
     text-transform: uppercase;
   }
-
-  ul.post__tags {
-    display: flex;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-
-    li {
-      color: var(--green);
-      font-family: var(--font-mono);
-      font-size: var(--fz-xxs);
-      line-height: 1.75;
-
-      &:not(:last-of-type) {
-        margin-right: 15px;
-      }
-    }
-  }
 `;
 
-const PensievePage = ({ location, data }) => {
+const CaseStudiesPage = ({ location, data }) => {
   const posts = data.allMarkdownRemark.edges;
 
   return (
     <Layout location={location}>
-      <Helmet title="Pensieve" />
+      <Helmet title="Case Studies">
+        <meta
+          name="description"
+          content="In-depth engineering case studies by Yash Patel — zero-downtime migrations, PostgreSQL replica scaling, multi-tenant authorization, Temporal, and more."
+        />
+      </Helmet>
 
       <StyledMainContainer>
         <header>
-          <h1 className="big-heading">Pensieve</h1>
-          <p className="subtitle">
-            <a href="https://www.wizardingworld.com/writing-by-jk-rowling/pensieve">
-              a collection of memories
-            </a>
-          </p>
+          <h1 className="big-heading">Case Studies</h1>
+          <p className="subtitle">In-depth engineering deep dives — Problem, Approach, Impact</p>
         </header>
 
         <StyledGrid>
           {posts.length > 0 &&
             posts.map(({ node }, i) => {
-              const { frontmatter } = node;
-              const { title, description, slug, date, tags } = frontmatter;
-              const formattedDate = new Date(date).toLocaleDateString();
+              const { title, description, slug, date, company } = node.frontmatter;
+              const formattedDate = new Date(date).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+              });
 
               return (
                 <StyledPost key={i}>
@@ -180,16 +159,8 @@ const PensievePage = ({ location, data }) => {
                     </header>
 
                     <footer>
+                      <span className="post__company">{company}</span>
                       <span className="post__date">{formattedDate}</span>
-                      <ul className="post__tags">
-                        {tags.map((tag, i) => (
-                          <li key={i}>
-                            <Link to={`/pensieve/tags/${kebabCase(tag)}/`} className="inline-link">
-                              #{tag}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
                     </footer>
                   </div>
                 </StyledPost>
@@ -201,21 +172,18 @@ const PensievePage = ({ location, data }) => {
   );
 };
 
-PensievePage.propTypes = {
+CaseStudiesPage.propTypes = {
   location: PropTypes.object.isRequired,
   data: PropTypes.object.isRequired,
 };
 
-export default PensievePage;
+export default CaseStudiesPage;
 
 export const pageQuery = graphql`
   {
     allMarkdownRemark(
-      filter: {
-        fileAbsolutePath: { regex: "/content/posts/" }
-        frontmatter: { draft: { ne: true } }
-      }
-      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { fileAbsolutePath: { regex: "/content/case-studies/" } }
+      sort: { fields: [frontmatter___order], order: ASC }
     ) {
       edges {
         node {
@@ -224,10 +192,8 @@ export const pageQuery = graphql`
             description
             slug
             date
-            tags
-            draft
+            company
           }
-          html
         }
       }
     }

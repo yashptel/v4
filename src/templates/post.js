@@ -1,6 +1,5 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
-import kebabCase from 'lodash/kebabCase';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import styled from 'styled-components';
@@ -11,8 +10,11 @@ const StyledPostContainer = styled.main`
 `;
 const StyledPostHeader = styled.header`
   margin-bottom: 50px;
-  .tag {
-    margin-right: 10px;
+
+  .company {
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: var(--fz-sm);
   }
 `;
 const StyledPostContent = styled.div`
@@ -52,36 +54,33 @@ const StyledPostContent = styled.div`
 
 const PostTemplate = ({ data, location }) => {
   const { frontmatter, html } = data.markdownRemark;
-  const { title, date, tags } = frontmatter;
+  const { title, description, date, company } = frontmatter;
 
   return (
     <Layout location={location}>
-      <Helmet title={title} />
+      <Helmet title={title}>
+        <meta name="description" content={description} />
+        <meta property="og:title" content={`${title} | Yash Patel`} />
+        <meta property="og:description" content={description} />
+      </Helmet>
 
       <StyledPostContainer>
         <span className="breadcrumb">
           <span className="arrow">&larr;</span>
-          <Link to="/pensieve">All memories</Link>
+          <Link to="/case-studies">All case studies</Link>
         </span>
 
         <StyledPostHeader>
           <h1 className="medium-heading">{title}</h1>
           <p className="subtitle">
+            {company && <span className="company">{company}</span>}
+            {company && <span>&nbsp;&mdash;&nbsp;</span>}
             <time>
               {new Date(date).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
-                day: 'numeric',
               })}
             </time>
-            <span>&nbsp;&mdash;&nbsp;</span>
-            {tags &&
-              tags.length > 0 &&
-              tags.map((tag, i) => (
-                <Link key={i} to={`/pensieve/tags/${kebabCase(tag)}/`} className="tag">
-                  #{tag}
-                </Link>
-              ))}
           </p>
         </StyledPostHeader>
 
@@ -107,7 +106,7 @@ export const pageQuery = graphql`
         description
         date
         slug
-        tags
+        company
       }
     }
   }

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { useLocation } from '@reach/router';
 import { useStaticQuery, graphql } from 'gatsby';
+import { email, socialMedia } from '@config';
 
 // https://www.gatsbyjs.com/docs/add-seo-component/
 
@@ -40,12 +41,49 @@ const Head = ({ title, description, image }) => {
     url: `${siteUrl}${pathname}`,
   };
 
+  // JSON-LD Person structured data — https://schema.org/Person
+  const personSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Yash Patel',
+    url: siteUrl,
+    image: seo.image,
+    email: `mailto:${email}`,
+    jobTitle: 'Senior Full-Stack Software Engineer',
+    description: seo.description,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Bengaluru',
+      addressRegion: 'Karnataka',
+      addressCountry: 'India',
+    },
+    alumniOf: {
+      '@type': 'CollegeOrUniversity',
+      name: 'Gujarat Technological University',
+    },
+    sameAs: socialMedia.map(({ url }) => url),
+    knowsAbout: [
+      'Backend engineering',
+      'Distributed systems',
+      'PostgreSQL',
+      'Database migrations',
+      'AWS',
+      'TypeScript',
+      'Node.js',
+      'Go',
+      'Temporal',
+      'System design',
+    ],
+  };
+
   return (
     <Helmet title={title} defaultTitle={seo.title} titleTemplate={`%s | ${defaultTitle}`}>
       <html lang="en" />
 
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
+
+      <link rel="canonical" href={seo.url} />
 
       <meta property="og:title" content={seo.title} />
       <meta property="og:description" content={seo.description} />
@@ -54,12 +92,12 @@ const Head = ({ title, description, image }) => {
       <meta property="og:type" content="website" />
 
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:creator" content={twitterUsername} />
+      {twitterUsername && <meta name="twitter:creator" content={twitterUsername} />}
       <meta name="twitter:title" content={seo.title} />
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={seo.image} />
 
-      <meta name="google-site-verification" content="DCl7VAf9tcz6eD9gb67NfkNnJ1PKRNcg8qQiwpbx9Lk" />
+      <script type="application/ld+json">{JSON.stringify(personSchema)}</script>
     </Helmet>
   );
 };

@@ -1,5 +1,5 @@
 module.exports = {
-  email: 'yashptel@duck.com',
+  email: 'yashptel@outlook.com',
 
   socialMedia: [
     {
@@ -7,20 +7,8 @@ module.exports = {
       url: 'https://github.com/yashptel',
     },
     {
-      name: 'Instagram',
-      url: 'https://www.instagram.com/bchiang7',
-    },
-    {
-      name: 'Twitter',
-      url: 'https://twitter.com/bchiang7',
-    },
-    {
       name: 'Linkedin',
-      url: 'https://www.linkedin.com/in/yashptel',
-    },
-    {
-      name: 'Codepen',
-      url: 'https://codepen.io/bchiang7',
+      url: 'https://linkedin.com/in/yashptel',
     },
   ],
 
@@ -36,6 +24,10 @@ module.exports = {
     {
       name: 'Work',
       url: '/#projects',
+    },
+    {
+      name: 'Case Studies',
+      url: '/#case-studies',
     },
     {
       name: 'Contact',
